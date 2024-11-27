@@ -1,0 +1,46 @@
+package test1;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class fitpeo {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		WebDriver driver= new ChromeDriver(); //initializes browser
+		
+		driver.manage().window().maximize();  // for maximize the window 
+		
+		//1.Navigating to Revenue Calculator Page:
+		driver.get("https://www.fitpeo.com/"); 
+		
+		//2.using linktest for Navigating to Revenue Calculator Page:
+		driver.findElement(By.linkText("Revenue Calculator")).click(); 
+		
+		//3.scrolling down to slider section
+	    JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,1000)", "");
+		
+		//4. Locating the slider using XPath
+		WebElement slider = driver.findElement(By.xpath("//span[@class='MuiSlider-root MuiSlider-colorPrimary MuiSlider-sizeMedium css-16i48op']"));
+
+		// Use JavaScriptExecutor to set the value
+		JavascriptExecutor js1 = (JavascriptExecutor) driver;
+		js1.executeScript("arguments[0].value = arguments[1];", slider, "820"); 
+
+		//5,6.updating text field with 520 and chcecking slider updated with 560
+	 driver.findElement(By.xpath("//input[@id=':R57alklff9da:']")).sendKeys("560");
+	
+	  //7.selecting checkboxes cpt codes CPT-99091,CPT-99453, CPT-99454, and CPT-99474.
+
+	WebElement cpt1 = driver.findElement(By.xpath("//div[@class='MuiBox-root css-rfiegf']//div[1]//label[1]//span[1]//input[1]"));
+	 cpt1.click();
+	driver.findElement(By.xpath("//div[@class='MuiBox-root css-1p19z09']//div[2]//label[1]//span[1]//input[1]")).click();
+	driver.findElement(By.xpath("//div[@class='MuiBox-root css-rfiegf']//div[3]//label[1]//span[1]//input[1]")).click();
+	driver.findElement(By.xpath("//div[8]//label[1]//span[1]//input[1]")).click();
+	}
+
+}
